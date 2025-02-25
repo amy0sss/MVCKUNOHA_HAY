@@ -1,0 +1,44 @@
+﻿@model MVCKUNOHA_HAY.Models.Item
+
+@{
+}
+<p>This the name of the Item @Model.Name</p>
+
+
+
+@* Variable embedding *@
+@{
+    var msg = "hello Asp";
+}
+<p>@msg</p>
+
+@* Expression embedding *@
+@{
+    var items = new List<string> { "Item1", "Item2", "Item3"};
+}
+<ul>
+@foreach (var item in items)
+{
+    <li>@item</li>
+}
+</ul>
+
+
+@* If condition statement *@
+@{
+    var IsLogIn = true;
+}
+@if (IsLogIn)
+{
+    <p>Welcome back homie!</p>
+
+    @* razor directives *@
+    <p>@DateTime.Now</p>
+
+    <p>Last week: @DateTime.Now - TimeSpan.FromDays(7)</p>;
+}
+else
+{
+    <p>Please check your username and password!</p>
+    <a href="mailto:Support@contoso.com"> Support@contoso.com </a>
+}
