@@ -1,0 +1,23 @@
+﻿@model List<MVCKUNOHA_HAY.Models.Item>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h3>Index</h3>
+<table class="table">
+    <thread>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thread>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>₱ @item.Price.ToString("N2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
