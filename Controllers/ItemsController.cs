@@ -41,7 +41,7 @@ namespace MVCKUNOHA_HAY.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id, Name, Price")] Item item)
+        public async Task<IActionResult> Create([Bind("Id, Name, Address, Email, Age")] Item item)
         {
             if (ModelState.IsValid)
             {
