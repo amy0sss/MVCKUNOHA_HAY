@@ -23,11 +23,6 @@ namespace MVCKUNOHA_HAY.Controllers
             return View(item);
         }
         //IActionResult parameters passing and filter id direct to URL
-        public IActionResult Edit(int id)
-        {
-            //get and displaying data passed by IActionResult parameters
-            return Content("id = " +id);
-        }
 
         public async Task<IActionResult> Index()
         {
@@ -41,7 +36,7 @@ namespace MVCKUNOHA_HAY.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id, Name, Address, Email, Age")] Item item)
+        public async Task<IActionResult> Create([Bind("Id, Name, Price")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -50,6 +45,42 @@ namespace MVCKUNOHA_HAY.Controllers
                 return RedirectToAction("Index");
             }
             return View(item);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var item = await _context.Items.FirstOrDefaultAsync(i => i.Id == id);
+            return View(item);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Name, Price")] Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Update(item);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(item);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var item = await _context.Items.FirstOrDefaultAsync(i => i.Id == id);
+            return View(item);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var item = await _context.Items.FirstOrDefaultAsync(i => i.Id == id);
+            if (item != null)
+            {
+                _context.Items.Remove(item);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
         }
 
     }
