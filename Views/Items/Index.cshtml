@@ -3,26 +3,124 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h3>Index</h3>
-<table class="table">
-    <thread>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Options</th>
-        </tr>
-    </thread>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+<h3 class="table-title">Index</h3>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
             <tr>
-                <td>@item.Name</td>
-                <td>@item.Price</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Options</th>
             </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>
+                        <div class="btn-row">
+                            <a class="btn btn-edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-delete" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    /* Container for centering and spacing */
+    .table-container {
+        width: 90%; /* Occupies most of the screen for a more fluid layout */
+        margin: 40px auto; /* Centers horizontally, adds top spacing */
+        text-align: left;
+    }
+
+    /* Title styling */
+    .table-title {
+        margin-top: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #f4f4f4;
+        font-size: 1.5rem;
+        /* Optional neon glow or gradient text can be added here */
+    }
+
+    /* Table styling */
+    .table {
+        width: 100%;
+        border-collapse: separate; /* Allows rounded corners without cutting off */
+        border-spacing: 0; /* Reset spacing to keep cells snug */
+        color: #f4f4f4;
+        background-color: #222; /* Dark background for the table */
+        border-radius: 8px; /* Rounded corners for a friendlier look */
+        overflow: hidden; /* Ensures the radius applies to table edges */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+        /* Table header cells */
+        .table thead th {
+            background-color: #333; /* Slightly darker header */
+            padding: 14px;
+            text-align: center;
+            color: #fff;
+            font-weight: 600;
+            border-bottom: 2px solid #444;
         }
-    </tbody>
-</table>
+
+        /* Table body cells */
+        .table tbody td {
+            padding: 12px;
+            vertical-align: middle;
+            border-bottom: 1px solid #444; /* Subtle row separation */
+        }
+
+        /* Hover effect on table rows */
+        .table tbody tr:hover {
+        }
+
+    /* Button styling */
+    .btn-edit,
+    .btn-delete {
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 0 2px;
+        text-decoration: none;
+        border-radius: 3px;
+        color: #fff;
+        transition: 0.3s;
+        background: linear-gradient(90deg, #4b6eaf, #00bcd4);
+        border: none;
+        font-weight: 480;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    /* Ensures buttons in .btn-row remain on the same line */
+    .btn-row {
+        display: inline-flex; /* Horizontal alignment */
+        gap: 10px; /* Spacing between buttons */
+        align-items: center; /* Vertically center them */
+    }
+
+        /* Override any global margin that might push them apart */
+        .btn-row .btn {
+            margin-top: 0; /* Cancel out top margin from global CSS */
+        }
+
+    /* Local style for the Delete button gradient */
+    .btn-delete {
+        background: linear-gradient(90deg, #d9534f, #c9302c);
+        /* If you need different hover effect, add it here too */
+    }
+
+        .btn-delete:hover {
+            background: linear-gradient(90deg, #c9302c, #d9534f);
+        }
+</style>
