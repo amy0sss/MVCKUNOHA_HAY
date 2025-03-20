@@ -9,5 +9,6 @@ namespace MVCKUNOHA_HAY.Data
 
         // Set Database using the Item model class
         public DbSet<Item> Items { get; set; }
+        public DbSet<TaskList> Tasks { get; set; }
     }
 }

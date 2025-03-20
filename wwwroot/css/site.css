@@ -158,6 +158,13 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-text-fill-color: transparent;
 }
 
+.Overdue {
+    text-shadow: 0 0 8px #b30000;
+    background: -webkit-linear-gradient(45deg, #ff0000, #b30000); /* Red gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 /* Smooth Fade-In Animation */
 @keyframes fadeIn {
     0% {
@@ -174,6 +181,60 @@ h1, h2, h3, h4, h5, h6 {
 body, .card {
     animation: fadeIn 0.8s ease-out;
 }
+
+.form-group {
+    width: 100%; /* Ensures each input container is full width */
+    max-width: 800px; /* Adjust as needed */
+    margin-bottom: 15px; /* Adds spacing between inputs */
+}
+
+.form-control {
+    width: 100%; /* Makes input fields take full width of the parent */
+    max-width: 100%; /* Ensures it doesn't shrink */
+    min-width: 400px; /* Prevents it from being too small */
+}
+
+.form-control-filter{
+    width: auto;
+}
+
+/* Focus State Styling for Form Controls */
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control-filter::placeholder {
+    color: var(--secondary-color);
+    opacity: 0.8;
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control-filter:focus::placeholder {
+    text-align: start;
+    color: var(--accent-color);
+}
+
+.form-control-filter:focus,
+.btn:focus {
+    box-shadow: 0 0 10px var(--accent-color);
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+/* Input and Form Control Styles */
+.form-control-filter,
+.form-control-plaintext {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.25rem 0.50rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+    .form-control-filter:focus,
+    .form-control-plaintext:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 5px var(--accent-color);
+    }
 
 /* Container Layout Adjustments */
 .container {

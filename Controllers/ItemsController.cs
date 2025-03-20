@@ -82,7 +82,5 @@ namespace MVCKUNOHA_HAY.Controllers
             }
             return RedirectToAction("Index");
         }
-
     }
-
 }

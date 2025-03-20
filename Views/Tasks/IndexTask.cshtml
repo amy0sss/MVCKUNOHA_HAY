@@ -1,0 +1,216 @@
+﻿@model List<TaskList>
+@{
+    var overdueTasks = ViewBag.OverdueTasks as List<TaskList>;
+}
+
+
+<h2 class="Index">INDEX</h2>
+<div class="table-container table-responsive">
+    <table class="table" id="taskTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Task</th>
+                <th>Description</th>
+                <th>Assigned</th>
+                <th>Deadline</th>
+                <th>Assigned By</th>
+                <th for="statusFilter">
+                    Status:
+                    <select id="statusFilter" class="form-control-filter">
+                        <option value="" disabled>Status</option>
+                        <option value="">All</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td>@task.LastName, @task.FirstName</td>
+                    <td>@task.TaskName</td>
+                    <td>@task.Description</td>
+                    <td>@task.DateAssigned</td>
+                    <td>@task.DateDeadline</td>
+                    <td>@task.AssignedBy</td>
+                    <td>@task.Status</td>
+                    <td>
+                        <div class="btn-row">
+                            <a class="btn btn-edit" asp-action="EditTask" asp-route-id="@task.Id">Edit</a>
+                            <a class="btn btn-delete" asp-action="DeleteTask" asp-route-id="@task.Id">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<h2 class="Overdue">OVERDUE TASK</h2>
+<div class="table-container table-responsive">
+    <table class="table" id="overdueTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Task</th>
+                <th>Description</th>
+                <th>Assigned</th>
+                <th>Deadline</th>
+                <th>Assigned By</th>
+                <th>Status</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in overdueTasks) // This only shows overdue tasks
+            {
+                <tr data-status="@task.Status">
+                    <td>@task.LastName, @task.FirstName</td>
+                    <td>@task.TaskName</td>
+                    <td>@task.Description</td>
+                    <td>@task.DateAssigned</td>
+                    <td>@task.DateDeadline</td>
+                    <td>@task.AssignedBy</td>
+                    <td>@task.Status</td>
+                    <td>
+                        <div class="btn-row">
+                            <a class="btn btn-edit" asp-action="EditTask" asp-route-id="@task.Id">Edit</a>
+                            <a class="btn btn-delete" asp-action="DeleteTask" asp-route-id="@task.Id">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+<style>
+    /* Container for centering and spacing */
+    .table-container {
+        width: 90%; /* Occupies most of the screen for a more fluid layout */
+        margin: 40px auto; /* Centers horizontally, adds top spacing */
+        text-align: left;
+    }
+
+    /* Title styling */
+    .table-title {
+        margin-top: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #f4f4f4;
+        font-size: 1.5rem;
+        /* Optional neon glow or gradient text can be added here */
+    }
+
+    /* Table styling */
+    .table {
+        width: 200%; /* Make the table expand */
+        table-layout: auto;
+        border-collapse: separate; /* Allows rounded corners without cutting off */
+        border-spacing: 0; /* Reset spacing to keep cells snug */
+        color: #f4f4f4;
+        background-color: #222; /* Dark background for the table */
+        border-radius: 8px; /* Rounded corners for a friendlier look */
+        overflow: hidden; /* Ensures the radius applies to table edges */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+        /* Table header cells */
+        .table thead th {
+            background-color: #333; /* Slightly darker header */
+            padding: 8px;
+            text-align: center;
+            color: #fff;
+            font-weight: 600;
+            border-bottom: 2px solid #444;
+        }
+
+        /* Table body cells */
+        .table tbody td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid #444; /* Subtle row separation */
+        }
+
+    /* Button styling */
+    .btn-edit,
+    .btn-delete {
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 0 2px;
+        text-decoration: none;
+        border-radius: 3px;
+        color: #fff;
+        transition: 0.3s;
+        background: linear-gradient(90deg, #4b6eaf, #00bcd4);
+        border: none;
+        font-weight: 480;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    /* Ensures buttons in .btn-row remain on the same line */
+    .btn-row {
+        display: inline-flex; /* Horizontal alignment */
+        gap: 10px; /* Spacing between buttons */
+        align-items: center; /* Vertically center them */
+    }
+
+        /* Override any global margin that might push them apart */
+        .btn-row .btn {
+            margin-top: 0; /* Cancel out top margin from global CSS */
+        }
+
+    /* Local style for the Delete button gradient */
+    .btn-delete {
+        background: linear-gradient(90deg, #d9534f, #c9302c);
+        /* If you need different hover effect, add it here too */
+    }
+
+        .btn-delete:hover {
+            background: linear-gradient(90deg, #c9302c, #d9534f);
+        }
+    /* Filter dropdown */
+    .filter-container {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    /* Adjust the select dropdown inside the Status header */
+    th[for="statusFilter"] {
+        position: relative;
+    }
+
+    #statusFilter {
+        width: 120px;
+        display: inline-block;
+        font-size: 14px;
+    }
+</style>
+
+<script>
+    document.getElementById('statusFilter').addEventListener('change', function () {
+        let selectedStatus = this.value.toLowerCase(); // Get selected status
+        let rows = document.querySelectorAll('#taskTable tbody tr'); // Get all table rows
+
+        rows.forEach(row => {
+            let statusCell = row.cells[6].textContent.trim().toLowerCase(); // Read status text in 7th column (index 6)
+
+            if (selectedStatus === "" || statusCell === selectedStatus) {
+                row.style.display = ""; // Show row if matches filter
+            } else {
+                row.style.display = "none"; // Hide row if it doesn't match
+            }
+        });
+    });
+</script>

@@ -1,0 +1,20 @@
+﻿@model MVCKUNOHA_HAY.Models.TaskList
+
+@{
+    ViewData["Title"] = "DeleteTask";
+}
+
+<h3>Delete a Task</h3>
+<p><strong>Name:</strong> @Model.LastName, @Model.FirstName</p>
+<p><strong>Task Name:</strong> @Model.TaskName</p>
+<p><strong>Description:</strong> @Model.Description</p>
+<p><strong>Status:</strong> @Model.Status</p>
+<p><strong>Date Assigned:</strong> @Model.DateAssigned.ToString("MM/dd/yyyy hh:mm tt")</p>
+<p><strong>Deadline:</strong> @Model.DateDeadline.ToString("MM/dd/yyyy hh:mm tt")</p>
+<p><strong>Assigned By:</strong> @Model.AssignedBy</p>
+
+<form asp-action="DeleteTask" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>

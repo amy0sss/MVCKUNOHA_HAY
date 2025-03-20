@@ -1,0 +1,46 @@
+﻿@model MVCKUNOHA_HAY.Models.TaskList
+
+@{
+    ViewData["Title"] = "CreateTask";
+}
+<h2>Add Task</h2>
+
+<form asp-action="CreateTask" method="post">
+    <div class="form-group">
+        <label for="FirstName">First Name</label>
+        <input type="text" class="form-control" asp-for="FirstName" />
+    </div>
+
+    <div class="form-group">
+        <label for="LastName">Last Name</label>
+        <input type="text" class="form-control" asp-for="LastName" />
+    </div>
+
+    <div class="form-group">
+        <label for="TaskName">Task Name</label>
+        <input type="text" class="form-control" asp-for="TaskName" />
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" class="form-control" asp-for="Description" />
+    </div>
+
+    <div class="form-group">
+        <label for="AssignedBy">Assigned  By</label>
+        <input type="text" class="form-control" asp-for="AssignedBy" />
+    </div>
+
+    <div class="form-group">
+        <label for="DateAssigned">Date Assigned</label>
+        <input type="datetime-local" class="form-control" asp-for="DateAssigned" />
+    </div>
+
+    <div class="form-group">
+        <label for="DateDeadline">Date Deadline</label>
+        <input type="datetime-local" class="form-control" asp-for="DateDeadline" />
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Add Task</button>
+</form>
